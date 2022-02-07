@@ -1,0 +1,38 @@
+{% extends 'master/master.html' %}
+
+{% block 'title' %} Category page {% endblock %}
+
+{% block 'content' %}
+  <div class="container">
+       <div class="row justify-content-md-center">
+            <div class="col-8">
+                <a href="{% url 'createpost' %}" style="float:right;" class="btn btn-success">Add Post</a>
+                <br/>
+                <form method="post" action="{% url 'category' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                      <label for="exampleFormControlInput1" class="form-label">Category Title</label>
+                      <input type="text" name="categorytitle" class="form-control" id="exampleFormControlInput1" placeholder="Sports">
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="float:right">Save</button>
+                </form>
+                 {% include 'component/message.html' %}
+                <table class="table">
+                    <thead>
+                      <th>Category Title</th>
+                      <th>Publish Date</th>
+                    </thead>
+                    <tbody>
+                     {% for c in categories %}
+                         <tr>
+                             <td>{{c.title}}</td>
+                             <td>{{c.post_date}}</td>
+                         </tr>
+                     {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+       </div>
+ </div>
+
+{% endblock %}
