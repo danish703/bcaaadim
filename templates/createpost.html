@@ -7,11 +7,14 @@
       <div class="row justify-content-md-center">
         <h3>Create Post</h3>
         <hr/>
-          <form method="post" action="#" enctype="multipart/form-data">
+          <form method="post" action="{% url 'createpost' %}" enctype="multipart/form-data">
+              {% csrf_token %}
               {{form.as_p}}
               <hr/>
               <button type="submit" class="btn btn-success">Save</button>
           </form>
+
+           {% include 'component/message.html' %}
       </div>
   </div>
 {% endblock %}

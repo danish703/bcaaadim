@@ -24,8 +24,15 @@ def category(request):
 
 
 def createPost(request):
-    form = PostForm()
-    context = {
-        'form':form
-    }
-    return render(request,'createpost.html',context)
+    if request.method=='GET':
+        form = PostForm()
+        context = {
+            'form':form
+        }
+        return render(request,'createpost.html',context)
+    else:
+        form = PostForm(request.POST,request.FILES or None)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request,messages.SUCCESS,"saved")
+            return redirect('createpost')
