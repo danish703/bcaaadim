@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import Category
+from .models import Category, Posts
 from django.contrib import messages
 from .forms import PostForm
 # Create your views here.
@@ -36,3 +36,12 @@ def createPost(request):
             form.save()
             messages.add_message(request,messages.SUCCESS,"saved")
             return redirect('createpost')
+
+
+def posts(request):
+    posts = Posts.objects.all()
+
+    context = {
+        'posts':posts
+    }
+    return render(request,'posts.html',context)

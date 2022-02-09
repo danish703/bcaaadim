@@ -1,0 +1,25 @@
+{% extends 'master/master.html' %}
+
+{% block 'title' %}Posts{% endblock %}
+
+{% block 'content' %}
+
+
+ <div class="container">
+     <div class="row justify-content-md-center">
+          <div class="col-8">
+            {% for p in posts %}
+              <div class="card">
+                  <img src="{{MEDIA_URL}}{{p.img.url}}" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h5 class="card-title">{{p.title}}</h5>
+                    <p class="card-text">{{p.content}}</p>
+                    <a href="#" class="btn btn-primary">read more</a>
+                  </div>
+               </div>
+              {% endfor %}
+          </div>
+     </div>
+ </div>
+
+{% endblock %}
